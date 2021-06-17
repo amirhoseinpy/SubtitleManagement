@@ -1,0 +1,2 @@
+webvtt_py==0.4.6
+googletrans==3.1.0a0
