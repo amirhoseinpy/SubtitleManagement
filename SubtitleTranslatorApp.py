@@ -66,10 +66,10 @@ class SubtitleTranslator:
 
 
 if __name__ == '__main__':
-    user_path_choice = input('get vtt file path or Enter for all...')
-    if user_path_choice[0] == user_path_choice[-1] == '"':
+    user_path_choice = input('get vtt file path or None for all...')
+    if user_path_choice and user_path_choice[0] == user_path_choice[-1] == '"':
         user_path_choice = user_path_choice[1:-1]
-    if user_path_choice == '\n':
+    if not user_path_choice:
         for top, dirs, nondirs in os.walk(os.path.abspath('')):
             for item in nondirs:
                 if item.endswith('.vtt'):
