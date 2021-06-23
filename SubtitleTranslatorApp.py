@@ -74,10 +74,13 @@ if __name__ == '__main__':
         for top, dirs, nondirs in os.walk(os.path.abspath('')):
             for item in nondirs:
                 if item.endswith('.vtt'):
-                    sb = SubtitleTranslator(item)
-                    sb.maker()
-                    vtt = webvtt.read(os.path.join(top, item))
-                    vtt.save_as_srt()
+                    try:
+                        sb = SubtitleTranslator(item)
+                        sb.maker()
+                        vtt = webvtt.read(os.path.join(top, item))
+                        vtt.save_as_srt()
+                    except:
+                        continue
     if exists(user_path_choice):
         if user_path_choice.endswith('.vtt'):
             sb = SubtitleTranslator(user_path_choice)
