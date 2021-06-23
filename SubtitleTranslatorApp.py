@@ -39,6 +39,7 @@ class SubtitleTranslator:
                              untranslated_file)  # regex result like: '00:08:53.955 --> 00:08:57.420'
         context = re.split(r'\n\d+\n\d{,2}:\d{,2}:\d{,2}\.\d{,3}\s-->\s\d{,2}:\d{,2}:\d{,2}\.\d{,3}\n',
                            untranslated_file)  # regex result like: '\n118\n00:08:53.955 --> 00:08:57.420'
+        context = list(map(lambda m: re.sub(r'(.)\n(.)', r'\1 \2', m), context))
         return moments, context[1:]  # context[0]=='WEBVTT\n'
 
     @staticmethod
