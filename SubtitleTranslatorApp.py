@@ -22,13 +22,13 @@ class SubtitleTranslator:
 
     def maker(self) -> None:
         self._backup_old_file()
-        untranslated_file = self.open_untranslated_file()
+        untranslated_file = self._open_untranslated_file()
         moments, untranslated_context = self._splitter(untranslated_file)
         translated_context = self._translate(''.join(untranslated_context))
         translated_file = self._joiner(translated_context, moments)
         self._make_output_file(translated_file)
 
-    def open_untranslated_file(self) -> str:
+    def _open_untranslated_file(self) -> str:
         with open(self.file_address, 'r', encoding='utf-8') as file:
             untranslated_file = file.read()
         return untranslated_file
