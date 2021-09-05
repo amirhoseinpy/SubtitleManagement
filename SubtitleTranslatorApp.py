@@ -43,14 +43,12 @@ class SubtitleTranslator:
         return moments, context[1:]  # context[0]=='WEBVTT\n'
 
     @staticmethod
-    def _joiner(translated_context: str, moments: list) -> str:
+    def _joiner(translated_context: str, moments: list, rtl: bool = True) -> str:
         listed_translated_file = translated_context.split('\n')
         result = [None] * (len(listed_translated_file) + (len(moments) * 2))
         result[::3] = [str(i + 1) + '\n' for i in range(len(moments))]
         result[1::3] = moments
-        result[2::3] = [i + '\n\n' for i in listed_translated_file]
-        # for index, moment in enumerate(moments):
-        #     result += f'{index}\n{moment}\n{listed_translated_file[index]}\n\n'
+        result[2::3] = [('\u202b' + i + '\n\n' if rtl else i + '\n\n') for i in listed_translated_file]
         return 'WEBVTT\n\n' + ''.join(map(str, result))
 
     def _translate(self, to_translation: str) -> str:
